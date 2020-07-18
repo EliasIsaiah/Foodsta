@@ -27,19 +27,19 @@ export class ProfileComponent implements OnInit {
 
   // sets 'post' to the Post model to access/set it's properties
   post: Post = {
-    id: "",
-    image: "",
-    title: "",
-    caption: "",
-    cuisine: "",
+    id: '',
+    image: '',
+    title: '',
+    caption: '',
+    cuisine: '',
     gf: false,
     vegan: false,
     vegetarian: false,
     rating: 0,
-    restaurantName: "",
-    restaurantId: "",
-    userId: "",
-    userName: ""
+    restaurantName: '',
+    restaurantId: '',
+    userId: '',
+    userName: ''
   };
 
   user_data: any = {
@@ -51,9 +51,9 @@ export class ProfileComponent implements OnInit {
       // username: this.currentUserName,
       picture: this.currentUserPic
     }
-  }
+  };
 
-  image = "";
+  image = '';
   imageObj: File;
   imgURL: any;
 
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.actr.data.map(data => data.token).subscribe((res) => {
       console.log(res);
-    })
+    });
   }
 
   emptyImage() {
@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUsersPosts(this.currentUserId).subscribe((posts: any[]) => {
       this.posts = posts;
     });
-  };
+  }
 
   updateAuthData() {
 
@@ -93,8 +93,8 @@ export class ProfileComponent implements OnInit {
       console.log(res);
       this.profileService.profilePicSource.next(res.user_metadata.picture);
 
-    })
-  };
+    });
+  }
 
   onImagePicked(event: Event): void {
     const FILE = (event.target as HTMLInputElement).files[0];
@@ -103,8 +103,8 @@ export class ProfileComponent implements OnInit {
     reader.readAsDataURL(this.imageObj);
     reader.onload = (_event) => {
       this.imgURL = reader.result;
-    }
-  };
+    };
+  }
 
   onImageUpload() {
     if (this.imageObj) {
@@ -114,7 +114,7 @@ export class ProfileComponent implements OnInit {
 
       this.uploadService.imageUpload(imageForm).subscribe(res => {
 
-        this.user_data.user_metadata.picture = res['Location'];
+        this.user_data.user_metadata.picture = res.Location;
 
         // this.user_data.user_metadata.username = this.currentUserName;
 
@@ -126,7 +126,7 @@ export class ProfileComponent implements OnInit {
       this.updateAuthData();
     }
     this.emptyImage();
-  };
+  }
 
   // updateUsername() {
 
@@ -152,13 +152,13 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.getUserData(this.currentUserId).subscribe((res: any) => {
 
-      this.currentUserName = res.hasOwnProperty("given_name") ? res.given_name : res.nickname;
-      this.currentUserPic = res.hasOwnProperty("user_metadata") && res.user_metadata.hasOwnProperty("picture") ? res.user_metadata.picture : res.picture;
+      this.currentUserName = res.hasOwnProperty('given_name') ? res.given_name : res.nickname;
+      this.currentUserPic = res.hasOwnProperty('user_metadata') && res.user_metadata.hasOwnProperty('picture') ? res.user_metadata.picture : res.picture;
       this.profileService.profilePicSource.next(this.currentUserPic);
       this.profilePic = this.profileService.profilePicSource.value;
     });
     this.getUserPosts();
-  };
+  }
 
 
 }

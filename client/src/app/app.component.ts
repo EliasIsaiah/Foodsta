@@ -21,26 +21,6 @@ import { horizontalSlideAnimation, verticalSlideAnimation } from './animations';
 
 export class AppComponent implements OnInit {
 
-  title = 'Foodsta';
-  isDarkTheme: Observable<boolean>;
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
-  prepareRoute(outlet: RouterOutlet) {
-
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
-
-  items: BottomNavItem[] = [
-    { icon: 'home', label: 'Home', routerLink: '/home' },
-    { icon: 'add_a_photo', label: 'Add', routerLink: '/add-post' },
-    { icon: 'account_circle', label: 'Profile', routerLink: '/profile' },
-  ];
-
 
 
   constructor(
@@ -53,6 +33,26 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
+  }
+
+  title = 'Foodsta';
+  isDarkTheme: Observable<boolean>;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+  items: BottomNavItem[] = [
+    { icon: 'home', label: 'Home', routerLink: '/home' },
+    { icon: 'add_a_photo', label: 'Add', routerLink: '/add-post' },
+    { icon: 'account_circle', label: 'Profile', routerLink: '/profile' },
+  ];
+
+  prepareRoute(outlet: RouterOutlet) {
+
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
   private navigationInterceptor(event: Event): void {

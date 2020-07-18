@@ -54,10 +54,10 @@ export class PhotoContainerComponent {
 
   readonly = true;
 
-  isLoaded: boolean = false
+  isLoaded = false;
   mappedPosts: any;
 
-  isDarkTheme: Observable<boolean>
+  isDarkTheme: Observable<boolean>;
   isProfilePage: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -80,12 +80,12 @@ export class PhotoContainerComponent {
 
   ngOnInit() {
 
-    this.mappedPosts = this.posts.map((el) => ({ isLoaded: false, state: 'notLoaded', ...el }))
+    this.mappedPosts = this.posts.map((el) => ({ isLoaded: false, state: 'notLoaded', ...el }));
 
     this.posts = this.mappedPosts;
     this.isDarkTheme = this.themeService.isDarkTheme;
 
-    this.isProfilePage = (this.router.url === "/profile")
+    this.isProfilePage = (this.router.url === '/profile');
 
   }
 

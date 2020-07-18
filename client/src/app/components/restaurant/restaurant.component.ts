@@ -20,9 +20,9 @@ export class RestaurantComponent implements OnInit {
 
   public hoursCollapsed = true;
 
-  isDarkTheme: Observable<boolean>
+  isDarkTheme: Observable<boolean>;
 
-  @Input() restaurant: Restaurant
+  @Input() restaurant: Restaurant;
 
   restaurantId: string = null;
   currentRestaurant: Restaurant;
@@ -41,7 +41,7 @@ export class RestaurantComponent implements OnInit {
       this.posts = posts;
     });
 
-  };
+  }
 
 
   setRestaurantPgInfo() {
@@ -53,7 +53,7 @@ export class RestaurantComponent implements OnInit {
       this.getRestPosts(this.searchService.currentRestaurantId.value);
 
     });
-  };
+  }
 
 
   setCurrentRestaurant(currentRestaurantId) {
@@ -67,9 +67,9 @@ export class RestaurantComponent implements OnInit {
       });
 
       this.searchService.currentRestaurantId.next(currentRestaurantId);
-    };
+    }
 
-  };
+  }
 
 
   ngOnInit() {
@@ -77,7 +77,7 @@ export class RestaurantComponent implements OnInit {
     this.isDarkTheme = this.themeService.isDarkTheme;
 
     this.route.params.forEach((urlParameters) => {
-      this.restaurantId = urlParameters['id'];
+      this.restaurantId = urlParameters.id;
     });
 
     this.setCurrentRestaurant(this.restaurantId);

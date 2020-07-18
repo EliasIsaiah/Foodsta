@@ -13,7 +13,7 @@ export const fadeCollapse =
     transition(':leave', [
       animate('.4s', style({ opacity: '0', transform: 'translateY(-40px)', height: '0px', overflow: 'hidden' }))
     ])
-  ])
+  ]);
 
 export const fadeIn =
   trigger('fadeIn', [

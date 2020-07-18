@@ -23,11 +23,11 @@ export class PostService {
   postURL = '/api/posts'; // url for submitting form data
   getRestPostURL = '/api/posts/restaurant/'; // url for getting posts for specific restaurant
   getSearchPostURL = '/api/posts/partial/'; // url for getting posts based on user search
-  filteredPostsURL = '/api/posts/searchby/v2/' //url for getting posts using filters
+  filteredPostsURL = '/api/posts/searchby/v2/'; // url for getting posts using filters
 
   constructor(private http: HttpClient,
-    private snackBar: MatSnackBar,
-    private router: Router) { }
+              private snackBar: MatSnackBar,
+              private router: Router) { }
 
   public postSource: BehaviorSubject<any> = new BehaviorSubject([]);
 
@@ -45,24 +45,24 @@ export class PostService {
 
   getFilteredPosts(gf: boolean = false, vegan: boolean = false, vegetarian: boolean = false) {
 
-    let gfParam = gf ? '1' : '';
-    let veganParam = vegan ? '1' : '';
-    let vegParam = vegetarian ? '1' : '';
+    const gfParam = gf ? '1' : '';
+    const veganParam = vegan ? '1' : '';
+    const vegParam = vegetarian ? '1' : '';
 
-    let param = { "gf": gfParam, "vegan": veganParam, "vegetarian": vegParam };
+    const param = { gf: gfParam, vegan: veganParam, vegetarian: vegParam };
 
-    let params = new HttpParams()
+    let params = new HttpParams();
 
-    Object.keys(param).forEach(function (key) {
-      if (param[key])
+    Object.keys(param).forEach(function(key) {
+      if (param[key]) {
         params = params.append(key, param[key]);
+      }
     });
 
 
     if (gf || vegan || vegetarian) {
-      return this.http.get<Post[]>(`${this.filteredPostsURL}`, { params: params });
-    }
-    else {
+      return this.http.get<Post[]>(`${this.filteredPostsURL}`, { params });
+    } else {
       return this.getPosts();
     }
   }
@@ -70,7 +70,7 @@ export class PostService {
   savePost(post: Post) {
     this.http.post(`${this.postURL}`, post)
       .subscribe(res => {
-        this.openSnackBar("Post Uploaded!", "Done");
+        this.openSnackBar('Post Uploaded!', 'Done');
       });
   }
 

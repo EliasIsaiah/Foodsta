@@ -20,8 +20,8 @@ export class ToolbarComponent implements OnInit {
       shareReplay()
     );
 
-  isDarkTheme: Observable<boolean>
-  darkTheme: boolean = true;
+  isDarkTheme: Observable<boolean>;
+  darkTheme = true;
 
 
   constructor(
@@ -30,7 +30,7 @@ export class ToolbarComponent implements OnInit {
     private themeService: ThemeService) { }
 
   toggleDarkTheme() {
-    this.darkTheme = !this.darkTheme
+    this.darkTheme = !this.darkTheme;
     this.themeService.setDarkTheme(!this.darkTheme);
   }
 

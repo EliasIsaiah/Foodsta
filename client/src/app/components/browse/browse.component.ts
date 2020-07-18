@@ -22,14 +22,14 @@ export class BrowseComponent implements OnInit {
   restaurants: Search[] = [];
   posts: any[] = [];
 
-  sortGF: boolean = false;
-  sortVegan: boolean = false;
-  sortVegetarian: boolean = false;
+  sortGF = false;
+  sortVegan = false;
+  sortVegetarian = false;
 
   public filtersCollapsed = true;
 
-  isDarkTheme: Observable<boolean>
-  loadingPosts: boolean = true;
+  isDarkTheme: Observable<boolean>;
+  loadingPosts = true;
 
   public latitude;
   public longitude;
@@ -43,7 +43,7 @@ export class BrowseComponent implements OnInit {
     private themeService: ThemeService
   ) { }
 
-  getRestaurants(search = "restaurants", latitude = this.latitude, longitude = this.longitude) {
+  getRestaurants(search = 'restaurants', latitude = this.latitude, longitude = this.longitude) {
     this.searchService.restaurantApiInfo(search, latitude, longitude).subscribe(restaurants => {
 
       this.searchService.restaurantSource.next(restaurants);
@@ -82,12 +82,11 @@ export class BrowseComponent implements OnInit {
         this.posts = posts;
       });
 
-    }
-    else {
+    } else {
       this.getPosts();
       this.getRestaurants();
     }
-  };
+  }
 
   setLocationValues(location) {
     this.geolocationService.longitudeSource.next(location.lng);
@@ -105,16 +104,15 @@ export class BrowseComponent implements OnInit {
 
         this.onSearch();
       });
-    }
-    else {
+    } else {
       this.geolocationService.getPosition().then(pos => {
         this.setLocationValues(pos);
 
         this.onSearch();
       });
-    };
+    }
 
-  };
+  }
 
   filterPosts(event) {
 

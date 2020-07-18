@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchService } from '../../services/searches/search.service'
+import { SearchService } from '../../services/searches/search.service';
 import {
   trigger,
   style,
@@ -45,18 +45,18 @@ export class ListComponent implements OnInit {
 
 
   restaurants: any;
-  gettingRestaurants: boolean = false;
+  gettingRestaurants = false;
 
   public latitude;
   public longitude;
 
 
   constructor(private router: Router,
-    public searchService: SearchService,
-    public geolocationService: GeolocationService) { }
+              public searchService: SearchService,
+              public geolocationService: GeolocationService) { }
 
   ngOnInit() {
-    this.restaurants = this.searchService.restaurantSource
+    this.restaurants = this.searchService.restaurantSource;
   }
 
 
@@ -66,12 +66,12 @@ export class ListComponent implements OnInit {
 
       this.searchService.currentRestaurantSource.next(currentRestaurant);
 
-    })
+    });
 
     this.searchService.currentRestaurantId.next(clickedRestaurant.place_id);
 
     this.router.navigate(['restaurant', clickedRestaurant.place_id]);
-  };
+  }
 
   getLocation() {
     this.gettingRestaurants = true;
@@ -86,7 +86,7 @@ export class ListComponent implements OnInit {
 
   }
 
-  getRestaurants(search = "restaurants", latitude = this.latitude, longitude = this.longitude) {
+  getRestaurants(search = 'restaurants', latitude = this.latitude, longitude = this.longitude) {
     this.searchService.restaurantApiInfo(search, latitude, longitude).subscribe(restaurants => {
 
       this.gettingRestaurants = false;

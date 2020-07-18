@@ -11,10 +11,10 @@ import { PostService } from '../posts/post.service';
 export class UploadService {
 
   constructor(private http: HttpClient,
-    private postService: PostService) { }
+              private postService: PostService) { }
 
   imageUpload(picture: FormData) {
-    this.postService.openSnackBar("Post Uploading...", "Close");
+    this.postService.openSnackBar('Post Uploading...', 'Close');
     return this.http.post('/api/picUpload', picture);
   }
 }

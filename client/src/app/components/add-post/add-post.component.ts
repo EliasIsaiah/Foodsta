@@ -23,37 +23,6 @@ export interface SelectOptions {
 
 export class AddPostComponent implements OnInit {
 
-  // sets 'post' to the Post model to access/set it's properties
-  post: Post = {
-    id: "",
-    image: "",
-    title: "",
-    caption: "",
-    cuisine: "",
-    gf: false,
-    vegan: false,
-    vegetarian: false,
-    rating: 0,
-    restaurantName: "",
-    restaurantId: "",
-    userId: this.auth.userProfileSubject$.value.sub,
-    userName: this.auth.userProfileSubject$.value.given_name || this.auth.userProfileSubject$.value.nickname
-  };
-
-  image = "";
-  imageObj: File;
-  imgURL: any;
-
-  // code for location search 
-  restaurantsSubject$ = new BehaviorSubject<object>({});
-  restaurants$ = this.restaurantsSubject$.asObservable();
-  private searchTerms = new Subject<string>();
-  public restaurantName$ = new BehaviorSubject<string>("");
-
-  readonlyReview = true;
-  readonly = false;
-  isDarkTheme: Observable<boolean>
-
   constructor(
     public auth: AuthService,
     private postService: PostService,
@@ -66,72 +35,43 @@ export class AddPostComponent implements OnInit {
     config.readonly = true;
   }
 
-  search(term: string): void {
-    if (term) {
-      this.searchTerms.next(term);
-    }
+
+
+
+
+
+
+
+  // sets 'post' to the Post model to access/set it's properties
+  post: Post = {
+    id: '',
+    image: '',
+    title: '',
+    caption: '',
+    cuisine: '',
+    gf: false,
+    vegan: false,
+    vegetarian: false,
+    rating: 0,
+    restaurantName: '',
+    restaurantId: '',
+    userId: this.auth.userProfileSubject$.value.sub,
+    userName: this.auth.userProfileSubject$.value.given_name || this.auth.userProfileSubject$.value.nickname
   };
 
-  ngOnInit(): void {
+  image = '';
+  imageObj: File;
+  imgURL: any;
 
-    this.restaurants$ = this.searchTerms.pipe(
+  // code for location search
+  restaurantsSubject$ = new BehaviorSubject<object>({});
+  restaurants$ = this.restaurantsSubject$.asObservable();
+  private searchTerms = new Subject<string>();
+  public restaurantName$ = new BehaviorSubject<string>('');
 
-      debounceTime(300),
-
-      distinctUntilChanged(),
-
-      switchMap((term: string) => this.searchService.autocompleteRestaurants(term))
-    );
-
-    this.isDarkTheme = this.themeService.isDarkTheme;
-
-  };
-
-  getInfo(optionInfo) {
-    this.post.restaurantId = optionInfo.place_id;
-    this.post.restaurantName = optionInfo.description;
-    this.restaurantName$.next(optionInfo.description);
-
-  };
-
-  getRestaurantName(option) {
-    return option.description
-  };
-
-  getPosts() {
-    this.postService.getPosts(this.post);
-  };
-
-  savePhoto() {
-    this.postService.savePost(this.post);
-    this.router.navigate(['home']);
-  };
-
-  onImagePicked(event: Event): void {
-    const FILE = (event.target as HTMLInputElement).files[0];
-    this.imageObj = FILE;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(this.imageObj);
-    reader.onload = (_event) => {
-      this.imgURL = reader.result;
-    };
-  };
-
-  onImageUpload() {
-    const imageForm = new FormData();
-    imageForm.append('picture', this.imageObj);
-
-    this.uploadService.imageUpload(imageForm).subscribe(res => {
-
-      this.post.image = res['Location'];
-
-      if (this.post.image) {
-        this.savePhoto();
-      }
-
-    });
-  }
+  readonlyReview = true;
+  readonly = false;
+  isDarkTheme: Observable<boolean>;
 
   categories: SelectOptions[] = [
     { value: 'African' },
@@ -152,5 +92,65 @@ export class AddPostComponent implements OnInit {
     { value: 'Vietnamese' },
     { value: 'Other' }
   ];
+
+  search(term: string): void {
+    if (term) {
+      this.searchTerms.next(term);
+    }
+  }
+  ngOnInit(): void {
+
+    this.restaurants$ = this.searchTerms.pipe(
+
+      debounceTime(300),
+
+      distinctUntilChanged(),
+
+      switchMap((term: string) => this.searchService.autocompleteRestaurants(term))
+    );
+
+    this.isDarkTheme = this.themeService.isDarkTheme;
+
+  }
+  getInfo(optionInfo) {
+    this.post.restaurantId = optionInfo.place_id;
+    this.post.restaurantName = optionInfo.description;
+    this.restaurantName$.next(optionInfo.description);
+
+  }
+  getRestaurantName(option) {
+    return option.description;
+  }
+  getPosts() {
+    this.postService.getPosts(this.post);
+  }
+  savePhoto() {
+    this.postService.savePost(this.post);
+    this.router.navigate(['home']);
+  }
+  onImagePicked(event: Event): void {
+    const FILE = (event.target as HTMLInputElement).files[0];
+    this.imageObj = FILE;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(this.imageObj);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
+  }
+  onImageUpload() {
+    const imageForm = new FormData();
+    imageForm.append('picture', this.imageObj);
+
+    this.uploadService.imageUpload(imageForm).subscribe(res => {
+
+      this.post.image = res.Location;
+
+      if (this.post.image) {
+        this.savePhoto();
+      }
+
+    });
+  }
 
 }

@@ -1,7 +1,7 @@
 export interface Location {
-  accuracy: number,
+  accuracy: number;
   location: {
     lat: number,
     lng: number
-  }
+  };
 }

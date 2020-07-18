@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Search } from '../../models/Search';
 import { Observable } from 'rxjs';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Restaurant } from 'src/app/models/Restaurant';
 import { shareReplay } from 'rxjs/operators';
 
@@ -14,26 +14,26 @@ import { shareReplay } from 'rxjs/operators';
 export class SearchService {
 
   // url to access get back data from google api
-  private url: string = `/api/google/place/v2/`;
-  private detailsUrl: string = `/api/google/place/restaurantdetails/`;
-  private autocompleteUrl: string = '/api/google/place/autocomplete/';
+  private url = `/api/google/place/v2/`;
+  private detailsUrl = `/api/google/place/restaurantdetails/`;
+  private autocompleteUrl = '/api/google/place/autocomplete/';
 
   public restaurantSource = new BehaviorSubject([]);
   public restaurants = this.restaurantSource.asObservable();
-  public currentRestaurantId = new BehaviorSubject("");
+  public currentRestaurantId = new BehaviorSubject('');
 
   public currentRestaurantSource: BehaviorSubject<Restaurant> = new BehaviorSubject({
-    id: "",
-    name: "",
-    address: "",
-    phoneNumber: "",
-    openingHour: "",
+    id: '',
+    name: '',
+    address: '',
+    phoneNumber: '',
+    openingHour: '',
     openNow: null,
     priceLevel: 1,
-    websiteUrl: "",
-    mapUrl: "",
-    latitude: "",
-    longitude: ""
+    websiteUrl: '',
+    mapUrl: '',
+    latitude: '',
+    longitude: ''
   });
 
   public currentRestaurant = this.currentRestaurantSource.asObservable;
@@ -47,13 +47,13 @@ export class SearchService {
   // gets user input from search bar and uses the google api to search for restaurants
   getRestaurants(input: string, latitude: string, longitude: string): Observable<Search[]> {
 
-    let params = new HttpParams()
+    const params = new HttpParams()
       .set('searchInput', input)
       .set('lat', latitude)
       .set('lng', longitude)
-      .set('radius', "5000");
+      .set('radius', '5000');
 
-    return this.http.get<Search[]>(`${this.url}`, { params: params });
+    return this.http.get<Search[]>(`${this.url}`, { params });
 
   }
 
@@ -82,14 +82,14 @@ export class SearchService {
     }
     console.log(this.restaurantCalls);
     return this.restaurantCalls[searchInput + latitude + longitude];
-  };
+  }
 
 
   autocompleteRestaurants(searchTerm: string) {
     console.log(searchTerm);
 
-    return this.http.get(`${this.autocompleteUrl}${searchTerm}`)
+    return this.http.get(`${this.autocompleteUrl}${searchTerm}`);
 
-  };
+  }
 
 }

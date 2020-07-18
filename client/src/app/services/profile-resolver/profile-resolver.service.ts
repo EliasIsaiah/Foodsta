@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ProfileService } from '../profile/profile.service';
 import { AuthService } from 'src/app/auth.service';
 
@@ -15,7 +15,7 @@ export class ProfileResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // this.profileService.getUserData.then(() => true);
     if (this.authService.userProfileSubject$) {
-      return true
+      return true;
     }
 
   }

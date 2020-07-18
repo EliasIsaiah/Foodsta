@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class GeolocationService {
 
-  private url: string = '/api/google/place/user/geolocation';
+  private url = '/api/google/place/user/geolocation';
 
   public latitudeSource = new BehaviorSubject({});
   public latitude = this.latitudeSource.asObservable();
@@ -16,15 +16,15 @@ export class GeolocationService {
   public longitudeSource = new BehaviorSubject({});
   public longitude = this.longitudeSource.asObservable();
 
-  public gotLocation = new BehaviorSubject(false)
+  public gotLocation = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) { }
 
   getGeolocation() {
 
-    return this.http.post(`${this.url}`, "");
+    return this.http.post(`${this.url}`, '');
 
-  };
+  }
 
 
   getPosition(): Promise<any> {
