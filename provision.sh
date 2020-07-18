@@ -4,8 +4,8 @@ apt-get install -y git
 
 sudo timedatectl set-timezone America/New_York
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-apt-get install -y build-essential nodejs
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y build-essential nodejs
 
 cd /var/www/client
 
