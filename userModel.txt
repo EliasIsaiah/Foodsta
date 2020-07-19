@@ -1,0 +1,24 @@
+user object
+
+user.first_name: string
+user.last_name: string
+user.app_metadata: object
+user.created_at: date //default
+user.email: string 
+user.email_verified: boolean
+user.last_password_reset: date
+user.permissions: string
+user.phone_number: string
+user.picture: string
+user.user_id: string
+user.user_metadata: object
+
+user.app_metadata:
+// Custom fields that store info about a user that influences the user's access, such as support plan, // security roles, or access control groups.
+
+user.user_metadata:
+// Custom fields that store info about a user that does not impact what they can or cannot access,
+// such as work address, home address, or user preferences
+
+
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastname:string,appMetadata:string,email:string,Verified:boolean,permissions:string,picture:string
