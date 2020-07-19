@@ -15,7 +15,8 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Posts', [{
-      id: uuid.fromString('testUUID'),
+      // id: uuid.fromString('testUUID'),
+      id: "2584b3a7-c0cc-447d-b657-64c62a169fcf",
       userName: "Elias Roussos",
       title: 'TITLE test title',
       caption: 'caption test caption',

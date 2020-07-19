@@ -1,3 +1,4 @@
+require("dotenv").config()
 // Get dependencies
 const
     express = require('express'),

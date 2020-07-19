@@ -13,7 +13,8 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Posts', [{
-      UserId: uuid.fromString('testUUID'),
+      // UserId: uuid.fromString('testUUID'),
+      UserId: "2584b3a7-c0cc-447d-b657-64c62a169fcf",
       userName: "Elias Roussos",
       title: 'TITLE test title',
       caption: 'caption test caption',
@@ -28,7 +29,8 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      UserId: uuid.fromString('testUUID'),
+      // UserId: uuid.fromString('testUUID'),
+      UserId: "2584b3a7-c0cc-447d-b657-64c62a169fcf",
       userName: "Elias Roussos",
       title: 'TITLE2 test title',
       caption: 'caption2 test caption',
@@ -43,7 +45,8 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      UserId: uuid.fromString('testUUID'),
+      // UserId: uuid.fromString('testUUID'),
+      UserId: "2584b3a7-c0cc-447d-b657-64c62a169fcf",
       userName: "Elias Roussos",
       title: 'TITLE3 test title',
       caption: 'caption3 test caption',
