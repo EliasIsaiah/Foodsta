@@ -1,11 +1,12 @@
+const { v4: uuidv4 } = require('uuid');
+
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-    id: {
-      allowNull: false,
-      primaryKey: true,
+    postId: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: uuidv4(),
+      primaryKey: true
     },
     userId: DataTypes.UUIDV4,
     userName: DataTypes.STRING,

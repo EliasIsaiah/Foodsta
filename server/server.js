@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 require("dotenv").config()
 // Get dependencies
 const
@@ -23,3 +24,5 @@ app.get('/*', routes);
  * Listen on provided port, on all network interfaces.
  */
 app.listen(PORT, () => console.log(`API running on localhost:${PORT}`));
+
+console.log(uuidv4());

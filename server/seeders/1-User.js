@@ -14,19 +14,20 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Posts', [{
+    return queryInterface.bulkInsert('Users', [{
       // id: uuid.fromString('testUUID'),
-      id: "2584b3a7-c0cc-447d-b657-64c62a169fcf",
-      userName: "Elias Roussos",
-      title: 'TITLE test title',
-      caption: 'caption test caption',
-      cuisine: 'chinese',
-      image: 'http://placekitten.com/g/200/300',
-      rating: '7',
-      gf: 'false',
-      vegan: 'false',
-      vegetarian: 'true',
-      RestaurantId: '1',
+      // id: "2584b3a7-c0cc-447d-b657-64c62a169fcf",
+      firstName: "Elias",
+      lastName: "Roussos",
+      appMetadata: "",
+      email: 'eliasisaiah@outlook.com',
+      verified: true,
+      permissions: "",
+      picture: 'http://placekitten.com/g/200/300',
+      // gf: 'false',
+      // vegan: 'false',
+      // vegetarian: 'true',
+      // RestaurantId: '1',
       createdAt: new Date(),
       updatedAt: new Date()
     }
